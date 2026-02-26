@@ -63,20 +63,20 @@ fun ContactData(contact: Contact) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        AvaSection(contact)
+        Avatar(contact)
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        NameSection(contact)
+        NamePart(contact)
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        InfoSection(contact)
+        InfoPart(contact)
     }
 }
 
 @Composable
-fun AvaSection(contact: Contact) {
+fun Avatar(contact: Contact) {
 
     Box(
         contentAlignment = Alignment.Center
@@ -110,13 +110,14 @@ fun AvaSection(contact: Contact) {
 }
 
 @Composable
-fun NameSection(contact: Contact) {
+fun NamePart(contact: Contact) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Text(
-            text = listOfNotNull(contact.name, contact.surname).joinToString(" "), // если нет имени или отчества, то убирается пробел и исп.разделитель пробел
+            //text = listOfNotNull(contact.name, contact.surname).joinToString(" "), // если нет имени или отчества, то убирается пробел и исп.разделитель пробел
+            text = contact.fullName,
             style = MaterialTheme.typography.titleLarge
         )
 
@@ -138,7 +139,7 @@ fun NameSection(contact: Contact) {
                 Icon(
                     painter = painterResource(id = android.R.drawable.star_big_on),
                     contentDescription = null,
-                    tint = Color(0xFFFFC107)
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
 
@@ -148,7 +149,7 @@ fun NameSection(contact: Contact) {
 }
 
 @Composable
-fun InfoSection(contact: Contact) {
+fun InfoPart(contact: Contact) {
 
     // обернул в Row для распределения по горизонтали
     Row(
@@ -219,7 +220,7 @@ fun InfoRow(
 
 @Preview(name = "portrait", showSystemUi = true)
 @Composable
-fun ContactColumnListPreview() {
+private fun ContactColumnListPreview() {
     ContactData(
         contact = Contact(
             name = "Евгений",
@@ -236,7 +237,7 @@ fun ContactColumnListPreview() {
 
 @Preview(name = "portrait", showSystemUi = true)
 @Composable
-fun ContactColumnListPreviewKuzyakin() {
+private fun ContactColumnListPreviewKuzyakin() {
     ContactData(
         contact = Contact(
             name = "Василий",
